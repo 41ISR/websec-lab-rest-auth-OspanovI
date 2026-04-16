@@ -1,0 +1,193 @@
+{
+  "name": "Book API",
+  "version": "1",
+  "items": [
+    {
+      "name": "Auth",
+      "items": [
+        {
+          "name": "Register",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/auth/register",
+            "method": "POST",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"newuser\",\n  \"email\": \"new@example.com\",\n  \"password\": \"secret123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/auth/login",
+            "method": "POST",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"qwerty123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/auth/profile",
+            "method": "GET",
+            "headers": [
+              { "name": "Authorization", "value": "Bearer {{token}}" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "items": [
+        {
+          "name": "Get All Books",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/books",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "Get Book by ID",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/books/1",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "Create Book",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/books",
+            "method": "POST",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" },
+              { "name": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"title\": \"Новая книга\",\n  \"author\": \"Автор\",\n  \"year\": 2023,\n  \"genre\": \"Фантастика\",\n  \"description\": \"Описание...\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Book",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/books/1",
+            "method": "PUT",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" },
+              { "name": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"title\": \"Обновлённое название\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Book",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/books/1",
+            "method": "DELETE",
+            "headers": [
+              { "name": "Authorization", "value": "Bearer {{token}}" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "items": [
+        {
+          "name": "Get Reviews for Book",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/books/1/reviews",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "Add Review",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/books/1/reviews",
+            "method": "POST",
+            "headers": [
+              { "name": "Content-Type", "value": "application/json" },
+              { "name": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"rating\": 5,\n  \"comment\": \"Отличная книга!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Review",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/reviews/1",
+            "method": "DELETE",
+            "headers": [
+              { "name": "Authorization", "value": "Bearer {{token}}" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "items": [
+        {
+          "name": "Get All Users",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/admin/users",
+            "method": "GET",
+            "headers": [
+              { "name": "Authorization", "value": "Bearer {{adminToken}}" }
+            ]
+          }
+        },
+        {
+          "name": "Delete User",
+          "type": "http-request",
+          "request": {
+            "url": "{{baseUrl}}/api/admin/users/2",
+            "method": "DELETE",
+            "headers": [
+              { "name": "Authorization", "value": "Bearer {{adminToken}}" }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "name": "Local",
+      "variables": {
+        "baseUrl": "http://localhost:3000",
+        "token": "",
+        "adminToken": ""
+      }
+    }
+  ]
+}
